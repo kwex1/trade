@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+
+<!-- Carousel begins --> 
+<div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="3000">
+        <img src="{% static 'img/invest1.jpg' %}" class="d-block w-100" style="height: 75vh; object-fit: cover;" alt="...">
+        <div class="overlay"></div>
+        <div class="carousel-caption animate__animated animate__bounceInUp">
+          <p>We Provide</p>
+          <h1>Customised Investment Options </h1>
+          <p>We tailor investment strategies to individual needs and preferences</p>
+          <a href="#"><button class="btn btn-primary" type="submit">Get Started</button></a>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <img src="{% static 'img/invest2.jpg' %}" class="d-block w-100" style="height: 75vh; object-fit: cover;" alt="...">
+        <div class="overlay"></div>
+        <div class="carousel-caption animate__animated animate__bounceInUp">
+          <p>We Provide</p>
+          <h1>FINANCIAL DRIVEN ASSETS</h1>
+          <p>Our assets selection are financial-based and that is why we can guarantee high ROI for investors</p>
+          <a href="#"><button class="btn btn-primary" type="submit">Get Started</button></a>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <img src="{% static 'img/invest3.png' %}" class="d-block w-100" style="height: 75vh; object-fit: cover;" alt="...">
+        <div class="overlay"></div>
+        <div class="carousel-caption animate__animated animate__bounceInUp">
+          <p>We Provide</p>
+          <h1>DIVERSIFY PORTFOLIO</h1>
+          <p>Diversification allows us minimize risk for our clients by spreads risk across assets, stocks, bonds, and brisk.</p>
+          <a href="#"><button class="btn btn-primary" type="submit">Get Started</button></a>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  
+  
+  <!--Carousel ended-->
+
+
+<div class="container section1">
+    <div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="offer">What We Offer</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="layer" data-aos="fade-right">
+                    <div>
+                        <span><i class="fa-solid fa-layer-group fa-2x icon"></i></span>
+                        <span class="num">01</span>
+                    </div>
+                    <div style="margin-left: 15px;">
+                        <p class="details">IDENTIFY ASSESTS</p>
+                        <div class="divide"></div>
+                        <p>We identify high potential assets using our intelligent financial markets systems, combined with expert advice.</p>
+                    </div>  
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="layer" data-aos="zoom-in">
+                    <div>
+                        <span><i class="fa-brands fa-react fa-2x icon"></i></span>
+                        <span class="num">02</span>
+                    </div>
+                    <div style="margin-left: 15px;">
+                        <p class="details">ANALYZE RISKS</p>
+                        <div class="divide"></div>
+                        <p>We carry out risk-reward analysis to determine the risk exposure for each asset we select.</p>
+                    </div>  
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="layer" data-aos="fade-left">
+                    <div>
+                        <span><i class="fa-solid fa-user-tie fa-2x icon"></i></span>
+                        <span class="num">03</span>
+                    </div>
+                    <div style="margin-left: 15px;">
+                        <p class="details">MANAGE PORTFOLIO</p>
+                        <div class="divide"></div>
+                        <p>We create and manage client portfolio using artificial intelligence and expert investment managers.</p>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fliud section2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="details">ABOUT US</h3>
+                <p class="about">Company_Name is a financial management company, providing high screened investment portfolio's which are present in all major capital markets. Our core benevolence of Financial services through our professional management and traders, creates a unique advancement of reliable financial services. This is why everything we do starts with a full understanding of what matters to you.</p>
+            </div>
+            <div class="col-lg-6">
+                <iframe width="100%" height="330" src="{% static 'media/registrationguide.mp4' %}" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container section3">
+    <div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="offer">Our Investment Packages</p>
+                <div class="divider"></div>
+                <p class="info">Here are our major investments from which we build investors' portfolios. These instruments and their underlying assets were carefully selected, using high-end fundamental and technical analysis.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card" style="width: 100%; margin-bottom: 15px;" data-aos="fade-right">
+                    <img src="{% static 'img/category1.jpg' %}" height="200" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Financial Planning</h5>
+                      <a href="#" class="btn btn-primary d-flex justify-content-center">click to learn more</a>
+                    </div>
+                </div>    
+            </div>
+            <div class="col-lg-3">
+                <div class="card" style="width: 100%; margin-bottom: 15px;" data-aos="zoom-in">
+                    <img src="{% static 'img/category2.jpg' %}" height="200" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Real Estate Investment</h5>
+                      <a href="#" class="btn btn-primary d-flex justify-content-center">click to learn more</a>
+                    </div>
+                </div> 
+                
+            </div>
+            <div class="col-lg-3">
+                <div class="card" style="width: 100%; margin-bottom: 15px;" data-aos="zoom-in">
+                    <img src="{% static 'img/category3.jpg' %}" height="200" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Cryptocurrency</h5>
+                      <a href="#" class="btn btn-primary d-flex justify-content-center">click to learn more</a>
+                    </div>
+                </div> 
+            
+            </div>
+            <div class="col-lg-3">
+                <div class="card" style="width: 100%; margin-bottom: 15px;" data-aos="fade-left">
+                    <img src="{% static 'img/category2.jpg' %}" height="200" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Real Estate Investment</h5>
+                      <a href="#" class="btn btn-primary d-flex justify-content-center">click to learn more</a>
+                    </div>
+                </div> 
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fliud">
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-lg-12">
+            <div class="counter">
+                <img src="{% static 'img/bg.jpg' %}" style="width: 100%; height: 50vh; object-fit: cover;" alt="error loading image">
+                <div class="overlay">
+                    <div class="trophy">
+                        <div class="row">
+                            <div class="col-lg-3 col-6">
+                                <div class="center">
+                                    <i class="fa-regular fa-user fa-2x d-flex justify-content-center" style="color: white;"></i>        
+                                    <p class="benifit d-flex justify-content-center">4428<span>+</span></p>
+                                    <p class="d-flex justify-content-center" style="color: white;">Satisfied Investors</p>
+                                </div>                                   
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <div class="center">
+                                    <i class="fa-solid fa-users fa-2x d-flex justify-content-center" style="color: white;"></i>
+                                    <p class="benifit d-flex justify-content-center">14666<span>+</span></p>
+                                    <p class="d-flex justify-content-center" style="color: white;">Consultations</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <div class="center">
+                                    <i class="fa-solid fa-trophy fa-2x d-flex justify-content-center" style="color: white;"></i>
+                                    <p class="benifit d-flex justify-content-center">27<span>+</span></p>
+                                    <p class="d-flex justify-content-center" style="color: white;">Awards won</p>
+                                </div> 
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <div class="center">
+                                    <i class="fa-solid fa-handshake fa-2x d-flex justify-content-center" style="color: white;"></i>
+                                    <p class="benifit d-flex justify-content-center">625<span>+</span></p>
+                                    <p class="d-flex justify-content-center" style="color: white;">Partnerships</p>
+                                </div> 
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fliud section4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="details">Our Vision</h3>
+                <p class="about">We hope through our services to grant financial freedom to as much people we can reach. Our journey has been fruitful so far and we are very optimistic that we will affect more lives positively through our relentless effort in improving our services. We believe saving should be simple. Through a straightforward and easy way to diversify your portfolios to achieve your financial goals. We’re making it easier to invest and make an impact without affecting your lifestyle. Everyone should be able to invest, regardless of their income. We are amazing financial investment platform, don't wait. You can start up now and grow your income.</p>
+            </div>
+            <div class="col-lg-6">
+                <div class="pt-4">
+                    <img src="{% static 'img/vision.jpg' %}" class="img-fluid img-thumbnail rounded" alt="...">
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="container section3">
+    <div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="sm-header">Testimonial</p>
+                <p class="testimony">What Our Client Say</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="quote swiper-slide">
+                            <i class="fa-solid fa-quote-left fa-2x d-flex justify-content-center" style="color: #096692;"></i>
+                            <p class="d-flex justify-content-center quote-text">As a researcher, I spend time mostly in the field, seeking answers. Having an investment with Whip finance limited has assured me steady weekly income in terms of profits from my investment, I recommend this company!.</p>
+                            <p class="d-flex justify-content-center mb-0"><strong>Ahmed Hamir</strong></p>
+                            <p class="d-flex justify-content-center"><small>INVESTOR</small></p>
+
+                        </div>
+                        <div class="quote swiper-slide">
+                            <i class="fa-solid fa-quote-left fa-2x d-flex justify-content-center" style="color: #096692;"></i>
+                            <p class="d-flex justify-content-center quote-text">My husband and I have tried a couple of investment companies in the past; many couldn't deliver on their promises, so when we tried Whip finance limited, i didn't really expect much, but when we started seeing our profits I was so excited I had to tell all my friends. Thank you.</p>
+                            <p class="d-flex justify-content-center mb-0"><strong>Kate Riga</strong></p>
+                            <p class="d-flex justify-content-center"><small>INVESTOR</small></p>
+
+                        </div>
+                        <div class="quote swiper-slide">
+                            <i class="fa-solid fa-quote-left fa-2x d-flex justify-content-center" style="color: #096692;"></i>
+                            <p class="d-flex justify-content-center quote-text">Investing is necessary!
+                                Working for a paycheck all your life is no good, especially at retiremen This realization led me to seek out ways to increase my savings, and that's when I found Whip finance limited. Payouts are amazingly fast and easy!.</p>
+                            <p class="d-flex justify-content-center mb-0"><strong>Stephan Kruse</strong></p>
+                            <p class="d-flex justify-content-center"><small>INVESTOR</small></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    AOS.init();
+</script>
+
+<script>
+    const swiper = new Swiper('.swiper', {
+    // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
+
+
+
+
+
+
+
+
+{% endblock %}
