@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,9 +30,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_countries',
+    'rest_framework',
     'backend.apps.BackendConfig',
 ]
 
+
+AUTH_USER_MODEL = 'backend.User'
 
 
 MIDDLEWARE = [
@@ -57,6 +62,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'backend.context_processors.TotalDeposit',
+                'backend.context_processors.PendingWithdrawal',
+                'backend.context_processors.TotalWithdrawal',
+                'backend.context_processors.ActiveDeposit',
+                'backend.context_processors.Notify',
+                'backend.context_processors.Message',
+                'backend.context_processors.ActiveEarnings',
             ],
         },
     },
@@ -69,10 +81,7 @@ WSGI_APPLICATION = 'trade.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(os.getenv('trade'))
 }
 
 
@@ -128,3 +137,15 @@ AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'apextrade'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST='smtppro.zoho.com'
+EMAIL_PORT =465
+EMAIL_HOST_USER='support@zenithport.com'
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL =True
+DEFAULT_FROM_EMAIL ='support@zenithport.com'
+
+LOGIN_REDIRECT_URL = ('/Profile-dashboard')
+LOGOUT_REDIRECT_URL = ('/')
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

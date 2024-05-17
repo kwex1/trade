@@ -1,0 +1,222 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block body %}
+
+<header class="header-base">
+  <div class="container">
+    <h1>Frequently Asked Questions</h1>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Frequently Asked Questions</a></li>
+    </ol>
+  </div>
+</header>
+<main>
+  <section class="section-base">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h3>Our Company</h3>
+          <hr class="space-sm" />
+          <ul class="accordion-list">
+            <li>
+                <a href="#"><i class="fa-solid fa-angle-right"></i> What is zenithport.com about ?</a>
+              <div class="content">
+                <p>
+                  zenithport.com conducts effective trading and
+                  investment transactions on Forex and Cryptocurrency.
+                </p>
+              </div>
+            </li>
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> Is zenithport.com a legally registered company ?</a>
+              <div class="content">
+                <p>Yes, zenithport.com is registered in UK.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <h3>Investors</h3>
+          <hr class="space-sm" />
+          <ul class="accordion-list">
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> Who can invest ?</a>
+              <div class="content">
+                <p>
+                  Any interested person can become an investor of
+                  zenithport.com, even with low or no basic experience
+                  on the crypto, forex markets. Our experts will guide you.
+                </p>
+              </div>
+            </li>
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> How Do I register account ?</a>
+              <div class="content">
+                <p>
+                  It is quite simple and convenient. Follow this
+                  <a href="{% url 'register' %}">link</a>, fill in the
+                  registration form and then press “Register”.
+                </p>
+              </div>
+            </li>
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> If I need support, how do I reach you ?</a>
+              <div class="content">
+                <p>
+                  You can always contact us Via our live chat, or send us an
+                  e-mail.
+                </p>
+              </div>
+            </li>
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> How can I make my first investment? </a>
+              <div class="content">
+                <p>
+                  First of all, you need to register a new account, click the
+                  <a href="{% url 'investment' %}">Make a Deposit"</a> button
+                  in the "Financial Operations" section, enter the amount,
+                  select the payment system and click "Confirm" button.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> How long will my investments be active and bring me income?</a>
+              <div class="content">
+                <p>
+                  We offer unlimited investment plans, which means you'll
+                  receive income all the time while the company is doing our
+                  business. You can use the profit calculator on the main page
+                  to calculate daily, weekly, monthly, and yearly profit.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> How much investment can I make in a day or a month?</a>
+              <div class="content">
+                <p>
+                  You can make as many investments as you want. We don't have
+                  such restrictions.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> Do you charge any fee for providing your investment services?
+                investment can I make in a day or a month?</a>
+              <div class="content">
+                <p>
+                  No, we don't charge any fees. The profit we receive from our
+                  overall investments is enough for us. We don't need to charge
+                  any fees for transactions, however, payment processors may
+                  charge you with receiving fees, and we have no control over
+                  that.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-6">
+          <h3>Withdrawal</h3>
+          <hr class="space-sm" />
+          <ul class="accordion-list">
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> Is daily profit paid directly to my currency account?
+              </a>
+              <div class="content">
+                <p>
+                  No, profits are gathered on your account balance and you can
+                  withdraw or reinvest it anytime.
+                </p>
+              </div>
+            </li>
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> How often can I withdraw funds from my account balance?
+              </a>
+              <div class="content">
+                <p>
+                  You can withdraw money from your account balance at any time
+                  and from any device without restrictions. All withdrawals are
+                  processed instantly.
+                </p>
+              </div>
+            </li>
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> Do you charge a withdrawal fee? </a>
+              <div class="content">
+                <p>
+                  No, we don't charge any fees. The profit we receive from our
+                  overall investments is enough for us. We don't need to charge
+                  any fees for transactions, however, payment processors may
+                  charge you with receiving fees, and we have no control over
+                  that.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> How can I withdraw funds? </a>
+              <div class="content">
+                <p>
+                  Log in to your account using your username and password, click
+                  the "Withdraw Funds" button in the "Financial Operations"
+                  section, select the payment system, enter your amount and
+                  click the "Confirm" and "Withdraw" buttons.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> After I make a withdrawal request, when will the funds be
+                available in my e-currency account?
+              </a>
+              <div class="content">
+                <p>
+                  The system works in automatic mode, which means that you are
+                  paid immediately after creating the request. Sometimes there
+                  may be delays in processing payments up to 12 hours. Please
+                  remember that cryptocurrency withdrawals may not appear in
+                  your wallet instantly.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> Can I invest through one payment method and withdraw to
+                another?
+              </a>
+              <div class="content">
+                <p>
+                  No, you can withdraw money only through the payment method
+                  with which you invested.<br />
+
+                  For example, if you invest through Bitcoin, you can withdraw
+                  only through Bitcoin. Also, if you receive an affiliate
+                  commission through Ethereum, you can withdraw it in the same
+                  e-currency.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <a href="#"><i class="fa-solid fa-angle-right"></i> How can I change my payment wallets? </a>
+              <div class="content">
+                <p>
+                  You can't change your payment wallets because this function is
+                  disabled for security reasons.<br />
+                  To make such changes, you must contact us through the support
+                  form and provide your secret question/answer and new payment
+                  wallets.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base2.html' %}{% load static %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 ms-2">
+    <li class="breadcrumb-item">
+      <!-- if breadcrumb is single--><span><a href="{% url 'home' %}" style="text-decoration: none; color: gray;">Home</a></span>
+    </li>
+    <li class="breadcrumb-item active"><span>Transaction</span></li>
+  </ol>
+</nav>
+{% endblock %}
+{% block body %}
+<div class="body flex-grow-1 px-3">
+    <!--Table content-->
+    <div class="row">
+        <h4>Transactions</h4>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Type</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for datas in data %}
+                <tr>
+                <td scope="row">{{forloop.counter}}</td>
+                <td>{{datas.action}}</td>
+                <td>{{datas.amount}}</td>
+                <td>{{datas.currency}}</td>
+                <td>{{datas.date_created.date}}</td>
+                {% if datas.status == True %}
+                <td><i class="fa-solid fa-circle-check" style="color: green;"></i> Confirmed</td>   
+                {% else %}
+                <td style="color: red;">Pending</td>
+                {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+  </div>
+</div>
+{% endblock %}

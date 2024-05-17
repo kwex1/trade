@@ -1,0 +1,71 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}">
+<div class="reg_bg">
+    <br>
+    <form action="" method="post">
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Payment type: </label>
+                <select name="" id="select">
+                    {% for datas in data %}
+                    <option value="{{datas.name}}">{{datas.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Amount: </label>
+              <input type="number" class="form-control" id="amount" name="amount">
+              <span style="color: red; display: none;" id="error">amount exceeds available balance</span>
+            </div>
+            <div>Available balance: $<span id="bal">{% if balance is None %}0{% else %}{{balance}}{% endif %}</span></div>
+            <button type="submit" id="reg_submit" class="contact_btn">Request Withdrawal</button>
+
+          </form>
+    </form>
+</div>
+
+<script>
+    const btn =  document.getElementById('reg_submit');
+    const bal =  document.getElementById('bal');
+    const amount =  document.getElementById('amount');
+    const error =  document.getElementById('error');
+    var token =  '{{csrf_token}}'
+    btn.addEventListener('click', (e)=>{
+        e.preventDefault()
+        this.disabled = true
+        if(parseInt(amount.value) > parseInt(bal.innerText)){
+            error.style.display = 'block'
+        }
+        else{
+            btn.innerText = 'Processing....'
+            $.ajax({
+                url:'/make_withdrawal/',
+                type:'post',
+                headers: { "X-CSRFToken": token },
+                data:{
+                    amount:$('#amount').val(),
+                    select:$('#select').val(),
+                },
+                success:function(response){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Withdrawal Initiated',
+                    })
+                    window.location.href = `${window.location.origin}/Profile-dashboard`
+                },
+                error:function(){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })  
+                }
+            })
+        }
+    })
+</script>
+
+{% endblock %}
+    

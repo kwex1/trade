@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}">
+
+<header class="header-base" style="margin-top: 100px;">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <ol class="breadcrumb">
+            <li><a href="{% url 'contact' %}">Home</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ol>
+    </div>
+</header>
+<div class="contact_bg">
+    <br>
+    <form action="" method="post">
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name: </label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address: </label>
+              <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3 ">
+                <label for="message" class="form-label">Message: </label>
+                <br>
+                <textarea class="form-control" style="width: 100%;" rows="5" id="message" name="message"></textarea>
+            </div>
+
+            <button type="submit" id="reg_submit" class="contact_btn">Send us a message</button>
+
+          </form>
+    </form>
+</div>
+
+<script>
+    const btn =  document.getElementById('reg_submit');
+    var token =  '{{csrf_token}}'
+    btn.addEventListener('click', (e)=>{
+        e.preventDefault()
+        $.ajax({
+            url:'/complain/',
+            type:'post',
+            headers: { "X-CSRFToken": token },
+            data:{
+                name:$('#name').val(),
+                email:$('#email').val(),
+                message:$('#message').val(),
+            },
+            success:function(response){
+                $('#name').val('')
+                $('#email').val('')
+                $('#message').val('')
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Message Delivered',
+                })
+            },
+            error:function(){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })  
+            }
+        })
+    })
+</script>
+
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'base2.html' %}{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}">
+
+<style>
+    .loader {
+        height: 30px;
+        aspect-ratio: 2.5;
+        --_g: no-repeat radial-gradient(farthest-side,#000 90%,#0000);
+        background: var(--_g), var(--_g), var(--_g), var(--_g);
+        background-size: 20% 50%;
+        animation: l44 1s infinite linear alternate;
+        position: absolute;
+        top: 50%;
+        right: 45%;
+        z-index: 3;
+    }
+    @keyframes l44 {
+        0%,
+        5%    {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+        12.5% {background-position: calc(0*100%/3) 0   ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+        25%   {background-position: calc(0*100%/3) 0   ,calc(1*100%/3) 0   ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+        37.5% {background-position: calc(0*100%/3) 100%,calc(1*100%/3) 0   ,calc(2*100%/3) 0   ,calc(3*100%/3) 50% }
+        50%   {background-position: calc(0*100%/3) 100%,calc(1*100%/3) 100%,calc(2*100%/3) 0   ,calc(3*100%/3) 0   }
+        62.5% {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 100%,calc(2*100%/3) 100%,calc(3*100%/3) 0   }
+        75%   {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 100%,calc(3*100%/3) 100%}
+        87.5% {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 100%}
+        95%,
+        100%  {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
+    }
+
+</style>
+<div style="position: relative;">
+    <div class="loader" style="display: none;"></div>
+    <div class="reg_bg">
+        <br>
+        <div class="mb-3">
+            <label for="email" class="form-label">To: </label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="mb-3">
+            <label for="subject" class="form-label">Subject: </label>
+            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject of Message">
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="switch">
+            <label class="form-check-label" for="switch">All</label>
+            </div>
+        <div class="mb-3 ">
+            <label for="message" class="form-label">Message: </label>
+            <br>
+            <textarea class="form-control" style="width: 100%;" rows="5" id="message" name="message">
+            </textarea>
+        </div>
+        <button type="submit" id="reg_submit" class="contact_btn">Send</button>
+
+    </div>
+</div>
+
+<Script>
+    const  btn =  document.getElementById('switch')
+    const email = document.getElementById('email')
+    const subject = document.getElementById('subject')
+    const message = document.getElementById('message')
+    const submit = document.getElementById('reg_submit')
+    var value = false
+    btn.addEventListener('click', (e)=>{
+        if (value === false){
+            value = true
+            email.value = ''
+            email.disabled = true
+        }
+        else{
+            value = false
+            email.disabled = false
+            
+        }
+        
+    })
+
+    
+    submit.addEventListener('click', ()=>{
+        const load = document.querySelector('.loader')
+        load.style.display = 'block'
+        submit.disabled = true
+        var token =  '{{csrf_token}}'
+        $.ajax({
+            url: '/sending_mail/',
+            type: 'post',
+            headers: { "X-CSRFToken": token },
+            data: {
+                'email' : email.value,
+                'subject' : subject.value,
+                'message'   : message.value,
+                'value' : value
+
+            },
+            success: function(response){
+                Swal.fire({
+                    icon: 'success',
+                    title: response.message,
+                })
+                load.style.display = 'none'
+                submit.disabled = false
+            },
+            error: function(error){
+
+            }
+        })
+    })
+
+</Script>
+
+{% endblock %}

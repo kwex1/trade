@@ -1,0 +1,193 @@
+{% extends 'base2.html' %}{% load static %}
+{% block body %}
+<div class="body flex-grow-1 px-2">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-sm-6 col-lg-3">
+          <div class="card mb-4 text-white bg-primary">
+            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
+              <div>
+                <div class="fs-4 fw-semibold">{% if balance is None %}$0{% else %}${{balance}}{% endif %}<span class="fs-6 fw-normal">
+                    <svg class="icon">
+                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-bottom"></use>
+                    </svg></span>
+                </div>
+                <span>Available </span>
+              </div>
+              <div style="display: inline;">
+                <div class="fs-4 fw-semibold">{% if earning is None %}$0{% else %}${{earning}}{% endif %}<span class="fs-6 fw-normal">
+                </div>
+                <span>System </span>
+              </div>
+            </div>
+            <div class="c-chart-wrapper mt-3 mx-3" style="height:70px; text-align: start;">
+              <p style="font-size: small;">Available balance are withdrawable balance while system earning is your daily profit.
+              </p>
+              <!--<canvas class="chart" id="card-chart1" height="70"></canvas>-->
+            </div>
+          </div>
+        </div>
+        <!-- /.col-->
+        <div class="col-sm-6 col-lg-3">
+          <div class="card mb-4 text-white bg-info">
+            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
+              <div>
+                <div class="fs-4 fw-semibold">{% if balance is None %}$0{% else %}${{confirm}}{% endif %}<span class="fs-6 fw-normal">
+                    <svg class="icon">
+                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-top"></use>
+                    </svg></span></div>
+                <div>Total Withdrawal</div>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <svg class="icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
+              <p style="font-size: small;">
+                Total Withdrawal is the total amount you have successfully withdraw from your  account.
+              </p>
+              <!--<canvas class="chart" id="card-chart2" height="70"></canvas>-->
+            </div>
+          </div>
+        </div>
+        <!-- /.col-->
+        <div class="col-sm-6 col-lg-3">
+          <div class="card mb-4 text-white bg-warning">
+            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
+              <div>
+                <div class="fs-4 fw-semibold">{% if balance is None %}$0{% else %}${{invest}}{% endif %}<span class="fs-6 fw-normal">
+                    <svg class="icon">
+                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-top"></use>
+                    </svg></span></div>
+                <div>Active Deposit</div>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <svg class="icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
+              <p style="font-size: small;" >
+                Active deposit shows the amount of funds currently  invested.
+              </p>
+              <!--<canvas class="chart" id="card-chart3" height="70"></canvas>-->
+            </div>
+          </div>
+        </div>
+        <!-- /.col-->
+        <div class="col-sm-6 col-lg-3">
+          <div class="card mb-4 text-white bg-danger">
+            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
+              <div>
+                <div class="fs-4 fw-semibold">{% if balance is None %}$0{% else %}${{withdraw}}{% endif %}<span class="fs-6 fw-normal">
+                    <svg class="icon">
+                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-bottom"></use>
+                    </svg></span></div>
+                <div>Pending Withdrawal</div>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-transparent text-white p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <svg class="icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-options"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
+              <p style="font-size: small;">
+                Pending withdrawal is the amount withdraw that is yet to be processed.
+              </p>
+              <!--<canvas class="chart" id="card-chart4" height="70"></canvas>-->
+            </div>
+          </div>
+        </div>
+        <!-- /.col-->
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-lg-12">
+            <div class="card mb-4" style="--cui-card-cap-bg: #3b5998">
+                <div class="card-header text-light" style="height: 15vh;">
+                    <h3>Referral</h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" id="progress" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="card-body row text-center">
+                    <div class="col">
+                        <div class="fs-5 fw-semibold">{% if total %}{{total}}{% else %}0{% endif %}</div>
+                        <div class="text-uppercase text-medium-emphasis small">Referrals</div>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="col">
+                        <div class="fs-5 fw-semibold">{% if earnings %}${{earnings}}{% else %}$0{% endif %}</div>
+                        <div class="text-uppercase text-medium-emphasis small">Earnings</div>
+                    </div>
+                </div>
+            </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="wallet" disabled>
+            <div class="input-group-append">
+              <span class="input-group-text bg-primary text-light" id="copy">Copy</span>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!--Table content-->
+    <h4>Transactions</h4>
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">SN</th>
+          <th scope="col">Action</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Type</th>
+          <th scope="col">Date</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for datas in data %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{datas.action}}</td>
+          <td>${{datas.amount}}</td>
+          <td>{% if datas.currency is None%} dollar {% else%} {{datas.currency}} {% endif %}</td>
+          <td>{{datas.date_created.date}}</td>
+          {% if datas.status == True %}
+          <td><i class="fa-solid fa-circle-check" style="color: green;"></i> Confirmed</td>   
+          {% else %}
+          <td style="color: red;">Pending</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  const value = '{{total}}'
+  const btn = document.getElementById('copy');
+  const progress = document.getElementById('progress');
+  progress.style.width = `${value}0%`
+  const wallet = document.getElementById('wallet');
+  wallet.value = `${window.location.origin}/register/{{refer}}`
+  btn.addEventListener('click', ()=>{
+      btn.innerText = 'copied'
+      navigator.clipboard.writeText(`${wallet.value}`)
+  })
+</script>
+{% endblock %}

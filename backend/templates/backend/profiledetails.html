@@ -1,0 +1,55 @@
+{% extends 'base2.html' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic"><strong>First Name:</strong></span>
+            </div>
+            <input type="text" class="form-control" id="basic-url" style="text-align: center;" aria-describedby="basic" value="{{request.user.first_name}}" disabled>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic"><strong>Last Name:</strong></span>
+            </div>
+            <input type="text" class="form-control" id="basic-url" style="text-align: center;" aria-describedby="basic" value="{{request.user.last_name}}" disabled >
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic"><strong>Username:</strong></span>
+            </div>
+            <input type="text" class="form-control" style="text-align: center;" id="basic-url" aria-describedby="basic" value="{{request.user.username}}" disabled>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic"><strong>Email:</strong></span>
+            </div>
+            <input type="text" class="form-control" id="basic-url" style="text-align: center;" aria-describedby="basic" value="{{request.user.email}}" disabled >
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic"><strong>Mobile Number:</strong></span>
+            </div>
+            <input type="text" class="form-control" style="text-align: center;" id="basic-url" aria-describedby="basic" value="{{details.mobile_number}}" disabled>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic"><strong>Country:</strong></span>
+            </div>
+            <input type="text" class="form-control" id="basic-url" style="text-align: center;" aria-describedby="basic" value="{{details.country.name}}" disabled >
+        </div>
+    </div>
+</div>
+{% endblock %}

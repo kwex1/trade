@@ -1,0 +1,43 @@
+{% extends 'base2.html' %}
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-lg-12">
+        <div class="card mb-4" style="--cui-card-cap-bg: #3b5998">
+            <div class="card-header text-light" style="height: 15vh;">
+                <h3>Referral</h3>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" id="progress" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div class="card-body row text-center">
+                <div class="col">
+                    <div class="fs-5 fw-semibold">{{total}}</div>
+                    <div class="text-uppercase text-medium-emphasis small">Referals</div>
+                </div>
+                <div class="vr"></div>
+                <div class="col">
+                    <div class="fs-5 fw-semibold">{% if earning %}${{earning}}{% else %}$0{% endif %}</div>
+                    <div class="text-uppercase text-medium-emphasis small">Earnings</div>
+                </div>
+            </div>
+        </div>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id="wallet" disabled>
+        <div class="input-group-append">
+          <span class="input-group-text bg-primary text-light" id="copy">Copy</span>
+        </div>
+    </div>
+</div>
+<script>
+    const value = '{{total}}'
+    const btn = document.getElementById('copy');
+    const progress = document.getElementById('progress');
+    progress.style.width = `${value}0%`
+    const wallet = document.getElementById('wallet');
+    wallet.value = `${window.location.origin}/register/{{refer}}`
+    btn.addEventListener('click', ()=>{
+        btn.innerText = 'copied'
+        navigator.clipboard.writeText(`${wallet.value}`)
+    })
+</script>
+{% endblock %}

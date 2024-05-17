@@ -1,0 +1,65 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}">
+<div class="center">
+	<br>
+	<form action="" method="post">
+		{% if form.errors %}
+		<div class="errors">
+			{{form.errors}}
+		</div>
+		{% endif %}
+		{% for message in messages %}
+		<center><span class="success">{{message}}</span></center>
+		{% endfor %}
+		{% csrf_token %}
+		<div class="row">
+			<div class="col-lg-6">
+				{{forms.first_name.label_tag}}
+				{{forms.first_name}}
+
+			</div>
+			<div class="col-lg-6">
+				{{forms.last_name.label_tag}}
+				{{forms.last_name}}
+
+			</div>
+
+			<div class="col-lg-6">
+				{{forms.username.label_tag}}
+				{{forms.username}}
+
+			</div>
+			<div class="col-lg-6">
+				{{forms.email.label_tag}}
+				{{forms.email}}
+
+			</div>
+
+			<div class="col-lg-6">
+				{{form.btc_wallet_address.label_tag}}
+				{{form.btc_wallet_address}}
+
+			</div>
+			<div class="col-lg-6">
+				{{form.eth_wallet_address.label_tag}}
+				{{form.eth_wallet_address}}
+
+			</div>
+
+			<div class="col-lg-6">
+				{{form.usdt_trc20_wallet_address.label_tag}}
+				{{form.usdt_trc20_wallet_address}}
+
+			</div>
+			<div class="col-lg-6">
+				{{form.mobile_number.label_tag}}
+				{{form.mobile_number}}
+			</div>
+		</div>
+		<br>
+		<button type="submit" id="reg_submit">Update</button>
+	</form>
+</div>
+{% endblock %}

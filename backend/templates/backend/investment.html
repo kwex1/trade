@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<main>
+    <section class="section-base ">
+        <div class="container">
+            <div class="row" data-anima="fade-bottom" data-timeline="asc" data-time="2000">
+                <div class="col-lg-4 anima">
+                    <div class="cnt-box cnt-pricing-table">
+                        <div class="top-area">
+                            <h2>STARTER TRADERS</h2>
+                            <div class="price"><span>3.9%</span></div>
+                            <p>DAILY FOR 3 DAYS</p>
+                        </div>
+                        <ul>
+                            <li>Minimum $50</li>
+                            <li>Maximum $999</li>
+                            <li>Total Profit Return: 12% </li>
+
+                            <li>Referral 2%</li>
+                        </ul>
+                        <div class="bottom-area">
+                            <a class="btn btn-border btn-xs" href="{% url 'active' %}">Invest now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 anima">
+                    <div class="cnt-box cnt-pricing-table">
+                        <div class="top-area">
+                            <h2>PREMIUM TRADERS</h2>
+                            <div class="price"><span>6%</span></div>
+                            <p>DAILY FOR 5 DAYS</p>
+                        </div>
+                        <ul>
+                            <li>Minimum $1000</li>
+                            <li>Maximum $5999</li>
+                            <li>Total Profit Return 30%</li>
+                            </li>
+
+                            <li>Referral 3%</li>
+                        </ul>
+                        <div class="bottom-area">
+                            <a class="btn btn-border btn-xs" href="{% url 'active' %}">Invest now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 anima">
+                    <div class="cnt-box cnt-pricing-table">
+                        <div class="top-area">
+                            <h2>VIP TRADER </h2>
+                            <div class="price"><span>10%</span></div>
+                            <p>DAILY FOR 7 DAYS</p>
+                        </div>
+                        <ul>
+                            <li>Minimum $6000</li>
+                            <li>Maximum UNLIMITED</li>
+                            <li>Total Profit Return: 70%</li>
+
+                            <li>Referral 5%</li>
+                        </ul>
+                        <div class="bottom-area">
+                            <a class="btn btn-border btn-xs" href="{% url 'active' %}">Invest now</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+{% endblock %}

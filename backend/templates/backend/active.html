@@ -1,0 +1,162 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}">
+<div class="reg_bg">
+    <br>
+    <form action="" method="post">
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Plan: </label>
+                <select name="" id="select">
+                    {% for data in invest %}
+                    <option value="{{data.name}}">{{data.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Amount: </label>
+              <input type="number" class="form-control" id="amount" name="amount">
+              <span style="color: red; display: none;" id="error">amount must not be empty or exceeds available balance</span>
+              <span style="color: red; display: none;" id="invest"></span>
+            </div>
+            <div>Available balance: $<span id="bal">{% if balance is None %}0{% else %}{{balance}}{% endif %}</span></div>
+            <button type="submit" id="reg_submit" class="contact_btn">Invest</button>
+
+          </form>
+    </form>
+</div>
+
+<script>
+    const btn =  document.getElementById('reg_submit');
+    const bal =  document.getElementById('bal');
+    const amount =  document.getElementById('amount');
+    const option =  document.getElementById('select');
+    const error =  document.getElementById('error');
+    const invest =  document.getElementById('invest');
+    var token =  '{{csrf_token}}'
+
+
+
+    btn.addEventListener('click', (e)=>{
+        e.preventDefault()
+        if(parseInt(bal.innerText) >= parseInt(amount.value) || amount.value == ' ' ){
+            if (option.value === 'Starter'&& (amount.value < 1000 && amount.value > 49) ){
+                btn.innerText = 'Processing.......'
+                btn.disabled = true
+            $.ajax({
+                url:'/investment_processing/',
+                type:'post',
+                headers: { "X-CSRFToken": token },
+                data:{
+                    amount:$('#amount').val(),
+                    select:$('#select').val(),
+                },
+                success:function(response){
+                    if (response == 'Number of Reinvestment reached for Starter'){
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Number of Reinvestment reached for Starter',
+                        })
+                        window.location.reload()
+                    }
+                    else{
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'Investment successful',
+                        })
+                        window.location.href = `${window.location.origin}/Profile-dashboard`
+                    }
+                    
+                },
+                error:function(){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })  
+                }
+            })    
+            }
+            else if( option.value === 'Premium' && (amount.value < 6000 && amount.value > 999)){
+                btn.innerText = "Processing...."
+                btn.disabled = true
+                $.ajax({
+                    url:'/investment_processing/',
+                    type:'post',
+                    headers: { "X-CSRFToken": token },
+                    data:{
+                        amount:$('#amount').val(),
+                        select:$('#select').val(),
+                    },
+                    success:function(response){
+                        if (response == 'Number of Reinvestment reached for Premium'){
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Number of Reinvestment reached for Premium',
+                        })
+                        window.location.reload()
+                    }
+                    else{
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'Investment successful',
+                        })
+                        window.location.href = `${window.location.origin}/Profile-dashboard`
+                    }
+                    },
+                    error:function(){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        })  
+                    }
+                })     
+            }
+            else if(option.value === 'Vip' && (amount.value > 5999)){
+                btn.innerText = "Processing...."
+                btn.disabled = true
+                $.ajax({
+                    url:'/investment_processing/',
+                    type:'post',
+                    headers: { "X-CSRFToken": token },
+                    data:{
+                        amount:$('#amount').val(),
+                        select:$('#select').val(),
+                    },
+                    success:function(response){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Investment successful',
+                        })
+                        window.location.href = `${window.location.origin}/Profile-dashboard`
+                    },
+                    error:function(){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        }) 
+                        btn.innerText = 'invest'
+                        document.location.reload()
+                    }
+                }) 
+            }
+            else{
+                invest.innerText = 'Minimum amount for each plan are ($50, $1000, $6000 ) respectively'
+                invest.style.display = 'block'
+                error.style.display = 'none' 
+            }  
+        } 
+        else{ 
+            error.style.display = 'block'
+            invest.style.display = 'none'        
+        } 
+    })
+</script>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,89 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}" />
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous"
+/>
+<div class="center">
+    <center>
+        <h4>Make Your Payment</h4>
+        <p>
+            Your order has been placed successfully. To complete,
+            please send the exact amount of <strong>${{amount}} in {{currency}}</strong> to
+            address below   
+        </p>
+    </center>
+    <div>
+        <div>
+            <center><h3>Pay {{currency}}</h3></center>
+        </div>
+        <div style="margin-left: auto; margin-right: auto; display: block;">
+            <img src="{{type.image.url}}" style="margin-left: auto; margin-right: auto; display: block; height: 20vh; width: 20vh;" alt="error loading Qrcode">
+            <!--<center><h3>1{{currency}}~${{type.rate}}</h3></center>-->
+        </div>
+        <div class="input-group mb-3"  style="padding-top: 20px;">
+            <input type="text" class="form-control" id="address" value="{{type.wallet_id}}">
+            <span class="input-group-text" id="wallet">copy</span>
+        </div>
+        <br>
+        <button type="submit" id="confirm">Confirm Payment</button>
+    </div>
+    <br>
+    <span style="color: red;"><i class="fa-solid fa-circle-info"></i> Be aware this order will be cancelled. if any other {{currency}} amount</span><br>
+    <span style="color: green;"><i class="fa-solid fa-circle-info"></i> Account will be credited on payment confirmation</span>
+    
+
+    
+</div>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"
+></script>
+
+<script>
+    const btn = document.getElementById('wallet');
+    const confirm = document.getElementById('confirm');
+    const address = document.getElementById('address');
+    var token =  '{{csrf_token}}'
+    btn.addEventListener('click', ()=>{
+        btn.innerText = 'copied'
+        navigator.clipboard.writeText(`${address.value}`)
+    })
+    confirm.addEventListener('click', ()=>{
+        confirm.innerText = 'Processing....'
+        $.ajax({
+            url:'/make_payment/',
+            type:'post',
+            headers: { "X-CSRFToken": token },
+            data:{
+            },
+            success:function(response){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Order Confirmation',
+                    text: 'Processing Payment',
+                })
+                const domain = window.location.origin
+                window.location.href = `${domain}/Profile-dashboard/`
+            },
+            error:function(error){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong! Try again',
+                })  
+            }
+        })
+    })
+    
+</script>
+
+
+
+{% endblock %}
