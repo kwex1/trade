@@ -68,11 +68,11 @@
                 <a class="nav-link active" href="#">BUY BITCOIN</a>
               </li>
               {% if not request.user.is_authenticated %}
-              <a href="{% url 'login' %}"><button class="btn btn-primary w-100" type="button">SIGN IN</button></a>
+              <a href="{% url 'login' %}"><button class="btn w-100" type="button">SIGN IN</button></a>
               {% else %}
               <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <button class="btn btn-primary w-100" type="submit" >Sign out</button>
+                <button class="btn w-100" type="submit" >Sign out</button>
               </form>
               {% endif%}
 
