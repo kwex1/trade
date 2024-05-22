@@ -1,47 +1,35 @@
 {% extends 'base2.html' %}{% load static %}
-{% block content %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb my-0 ms-2">
-    <li class="breadcrumb-item">
-      <!-- if breadcrumb is single--><span><a href="{% url 'home' %}" style="text-decoration: none; color: gray;">Home</a></span>
-    </li>
-    <li class="breadcrumb-item active"><span>Transaction</span></li>
-  </ol>
-</nav>
-{% endblock %}
+
 {% block body %}
-<div class="body flex-grow-1 px-3">
-    <!--Table content-->
-    <div class="row">
-        <h4>Transactions</h4>
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                <th scope="col">SN</th>
-                <th scope="col">Type</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Currency</th>
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for datas in data %}
-                <tr>
-                <td scope="row">{{forloop.counter}}</td>
-                <td>{{datas.action}}</td>
-                <td>{{datas.amount}}</td>
-                <td>{{datas.currency}}</td>
-                <td>{{datas.date_created.date}}</td>
-                {% if datas.status == True %}
-                <td><i class="fa-solid fa-circle-check" style="color: green;"></i> Confirmed</td>   
-                {% else %}
-                <td style="color: red;">Pending</td>
-                {% endif %}
-                </tr>
+<div class="container-fluid pt-4 px-4">
+  <div class="bg-secondary text-center rounded p-4">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+          <h6 class="mb-0">Transactions</h6>
+      </div>
+      <div class="table-responsive">
+          <table class="table text-start align-middle table-bordered table-hover mb-0">
+              <thead>
+                  <tr class="text-white">
+                      <th scope="col">Currency</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for item in data %}
+                  <tr>
+                      <td>{% if item.currency == None%}USDT{% else %}{{item.currency}}{% endif %}</td>
+                      <td>{{item.amount}}</td>
+                      <td>{{item.date_created.date}}</td>
+                      <td>{{item.status}}</td>
+                      <td>{{item.action}}</td>
+                  </tr>
                 {% endfor %}
-            </tbody>
-        </table>
+              </tbody>
+          </table>
+      </div>
   </div>
 </div>
 {% endblock %}

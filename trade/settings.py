@@ -147,5 +147,5 @@ EMAIL_USE_SSL =True
 DEFAULT_FROM_EMAIL ='support@zenithport.com'
 
 LOGIN_REDIRECT_URL = ('/Profile-dashboard')
-LOGOUT_REDIRECT_URL = ('/')
+LOGOUT_REDIRECT_URL = ('/login')
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

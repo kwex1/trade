@@ -44,6 +44,11 @@ def TransferHistorySave(sender, instance, created, **kwargs):
         ids = instance.user
         History.objects.create(user=ids, action='Transfer', amount=instance.amount, status = instance.status, date_created = instance.date_created)
 
+@receiver(post_save, sender=Transfer)
+def TransferUpdate(sender, instance, created, **kwargs):
+    if created == False:
+        History.objects.filter(transfer=instance).update(action='Transfer', status = instance.status, date_created = instance.date_created)
+
 
 @receiver(post_save, sender=Investment)
 def UpdateSystemEarning(sender, instance, created, **kwargs):

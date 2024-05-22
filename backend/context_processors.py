@@ -3,7 +3,7 @@ from .models import User, History, Notification,SystemEaring, Investment, Notifi
 
 def TotalDeposit(request):
     try:
-        amount= User.objects.get(user=request.user)
+        amount= User.objects.get(email=request.user.email)
         bal = amount.balance
         return {'balance':bal}
     except:

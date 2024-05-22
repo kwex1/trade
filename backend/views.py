@@ -45,7 +45,7 @@ def register(request):
             website = get_current_site(request).domain
             email_subject = 'Email Verification'
             email_body =  render_to_string('email/activation.html',{
-                'user':user.full_name,
+                'user':user.first_name,
                 'domain':website,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': TokenGenerator.make_token(user)
@@ -76,7 +76,7 @@ def ReferalRegister(request, referal):
             website = get_current_site(request).domain
             email_subject = 'Email Verification'
             email_body =  render_to_string('email/activation.html',{
-                'user':user.username,
+                'user':user.first_name,
                 'domain':website,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': TokenGenerator.make_token(user)
@@ -101,17 +101,16 @@ def ReferalRegister(request, referal):
 def Dashboard(request):
     user = request.user
     data = History.objects.filter(user = user)[:10]
-    detail = User.objects.get(email=user)
+    detail = User.objects.get(email= request.user.email)
 
     #referer
 
-    details =  User.objects.get(email = request.user)
     refer = User.objects.all().filter(refered_by = str(request.user))
     bonus = ReferalBonus.objects.all().filter(user=str(request.user))
     total = 0
     for i in bonus:
         total += i.earnings
-    arg = {'detail':detail, 'data':data, 'total':refer.count(), 'refer': details.referal, 'earnings':total}
+    arg = {'detail':detail, 'data':data, 'total':refer.count(), 'refer': detail.referal, 'earnings':total}
     return render(request, 'backend/dashboard.html', arg)
 
 
@@ -159,7 +158,6 @@ def Referal(request):
 @login_required(login_url='/login/')  
 def history(request):
     user = request.user
-    payment =Payment.objects.filter(user= user).last()
     data = History.objects.filter(user = user)
     args = {'data':data}
     return render(request, 'backend/history.html', args)
@@ -171,7 +169,7 @@ def editProfile(request):
         if forms.is_valid():
             data = forms.save()
             messages.add_message(request, messages.SUCCESS, 'Profile updated!',)
-            return redirect('/logout')
+            return redirect('/edit_personal_details')
             
     else:
         forms =  UserForm(instance=request.user)
@@ -191,7 +189,7 @@ def MakeWithdrawal(request):
     select = request.POST['select']
     withdraw = Withdrawal.objects.create(user= request.user, currency = select, amount= amount)
     withdraw.save()
-    bal =  User.objects.get(user= request.user)
+    bal =  User.objects.get(email= request.user.email)
     bal.balance -= int(amount)
     bal.save()
     return JsonResponse('Succesfully placed withdrawal', safe=False)
@@ -244,7 +242,7 @@ def SubmitInvestment(request):
         counting = Reinvestment.objects.get(user=request.user, plan=select)
         if counting.plan == 'Starter' and counting.number_of_investment < 2 or counting.plan == 'Premium' and counting.number_of_investment <4 or counting.plan == 'Vip' and counting.number_of_investment >= 0:
             invest = Investment.objects.create(user= request.user, plan= select, amount= amount, is_active= True)
-            referal =  User.objects.get(user=request.user)
+            referal =  User.objects.get(email=request.user.email)
 
             def Earn():
                 if select == 'Starter':
@@ -254,7 +252,7 @@ def SubmitInvestment(request):
                 else:
                     return 5
             ReferalBonus.objects.create(user = str(referal.refered_by), earnings = Earn())
-            bal =  User.objects.get(user= request.user)
+            bal =  User.objects.get(email=request.user.email)
             bal.balance -= int(amount)
             bal.save()
             counting.number_of_investment += 1
@@ -265,7 +263,7 @@ def SubmitInvestment(request):
     else:
         new = Reinvestment.objects.create(user=request.user, plan=select)
         invest = Investment.objects.create(user= request.user, plan= select, amount= amount, is_active= True)
-        referal =  User.objects.get(user=request.user)
+        referal =  User.objects.get(email=request.user.email)
 
         def Earn():
             if select == 'Starter':
@@ -340,7 +338,7 @@ def SendBulkEmail(request):
         item = User.objects.all()
         for i in item:
             user = {
-                'username': i.username,
+                'username': i.first_name,
                 'email': i.email
             }
             SendEmail(subject, user, message)
@@ -348,7 +346,7 @@ def SendBulkEmail(request):
         item = User.objects.filter(email = email)
         for i in item:
             user = {
-                'username': i.username,
+                'username': i.first_name,
                 'email': i.email
             }
             SendEmail(subject, user, message)

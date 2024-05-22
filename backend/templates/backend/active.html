@@ -1,31 +1,38 @@
 {% extends 'base2.html' %}
 {% load static %}
+
 {% block body %}
-<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}">
-<div class="reg_bg">
-    <br>
-    <form action="" method="post">
-        <form>
+
+<form method="post">
+    <div class="login-bg">
+        <div class="login px-4">
+            <p class="login-text">Investment</p>
             <div class="mb-3">
-                <label for="name" class="form-label">Plan: </label>
-                <select name="" id="select">
-                    {% for data in invest %}
-                    <option value="{{data.name}}">{{data.name}}</option>
-                    {% endfor %}
-                </select>
+                <label for="exampleFormControlInput1" class="form-label">Plan: </label>
+                <div class="input-group mb-3">
+                    <select name="" id="select">
+                        {% for data in invest %}
+                        <option value="{{data.name}}">{{data.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
+
             <div class="mb-3">
-              <label for="email" class="form-label">Amount: </label>
-              <input type="number" class="form-control" id="amount" name="amount">
-              <span style="color: red; display: none;" id="error">amount must not be empty or exceeds available balance</span>
-              <span style="color: red; display: none;" id="invest"></span>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Amount: </label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="amount" name="amount" style="border: 2px solid #bee4fd; box-shadow: none;">
+                        <span style="color: red; display: none;" id="error">amount must not be empty or exceeds available balance</span>
+                        <span style="color: red; display: none;" id="invest"></span>
+                    </div>
+                </div>            
             </div>
             <div>Available balance: $<span id="bal">{% if balance is None %}0{% else %}{{balance}}{% endif %}</span></div>
-            <button type="submit" id="reg_submit" class="contact_btn">Invest</button>
-
-          </form>
-    </form>
-</div>
+            <button type="submit" id="reg_submit" class="btn w-100" style="box-shadow: none; border: none;">Make Investment</button>
+        </div>
+    </div>
+</form>
 
 <script>
     const btn =  document.getElementById('reg_submit');
@@ -44,39 +51,41 @@
             if (option.value === 'Starter'&& (amount.value < 1000 && amount.value > 49) ){
                 btn.innerText = 'Processing.......'
                 btn.disabled = true
-            $.ajax({
-                url:'/investment_processing/',
-                type:'post',
-                headers: { "X-CSRFToken": token },
-                data:{
-                    amount:$('#amount').val(),
-                    select:$('#select').val(),
-                },
-                success:function(response){
-                    if (response == 'Number of Reinvestment reached for Starter'){
+                $.ajax({
+                    url:'/investment_processing/',
+                    type:'post',
+                    headers: { "X-CSRFToken": token },
+                    data:{
+                        amount:$('#amount').val(),
+                        select:$('#select').val(),
+                    },
+                    success:function(response){
+                        if (response == 'Number of Reinvestment reached for Starter'){
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Number of Reinvestment reached for Starter',
+                            })
+                            window.location.reload()
+                        }
+                        else{
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'Investment successful',
+                            })
+                            window.location.href = `${window.location.origin}/Profile-dashboard`
+                        }
+                        
+                    },
+                    error:function(){
                         Swal.fire({
-                        icon: 'error',
-                        title: 'Number of Reinvestment reached for Starter',
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
                         })
-                        window.location.reload()
+                        btn.innerText = "Make Investment"
+                        btn.disabled = false
                     }
-                    else{
-                        Swal.fire({
-                        icon: 'success',
-                        title: 'Investment successful',
-                        })
-                        window.location.href = `${window.location.origin}/Profile-dashboard`
-                    }
-                    
-                },
-                error:function(){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                    })  
-                }
-            })    
+                })    
             }
             else if( option.value === 'Premium' && (amount.value < 6000 && amount.value > 999)){
                 btn.innerText = "Processing...."
@@ -110,7 +119,9 @@
                             icon: 'error',
                             title: 'Oops...',
                             text: 'Something went wrong!',
-                        })  
+                        })
+                        btn.innerText = "Make Investment"
+                        btn.disabled = false
                     }
                 })     
             }
@@ -137,9 +148,9 @@
                             icon: 'error',
                             title: 'Oops...',
                             text: 'Something went wrong!',
-                        }) 
-                        btn.innerText = 'invest'
-                        document.location.reload()
+                        })
+                        btn.innerText = "Make Investment"
+                        btn.disabled = false
                     }
                 }) 
             }

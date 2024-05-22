@@ -1,28 +1,31 @@
 {% extends 'base2.html' %}
 {% load static %}
+
 {% block body %}
-<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}">
+
 <div class="reg_bg">
     <br>
     <form action="" method="post">
-        <form>
-            <div class="mb-3">
-                <label for="name" class="form-label">Payment type: </label>
-                <select name="" id="select">
-                    {% for datas in data %}
-                    <option value="{{datas.name}}">{{datas.name}}</option>
-                    {% endfor %}
-                </select>
+        <div class="login-bg">
+            <div class="login px-4">
+                <p class="login-text">Withdrawal</p>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Payment type: </label>
+                    <select name="" id="select">
+                        {% for datas in data %}
+                        <option value="{{datas.name}}">{{datas.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Amount: </label>
+                    <input type="number" class="form-control" id="amount" name="amount" style="border: 2px solid #bee4fd; box-shadow: none;">
+                    <span style="color: red; display: none;" id="error">amount exceeds available balance</span>
+                </div>
+                <div>Available balance: $<span id="bal">{% if balance is None %}0{% else %}{{balance}}{% endif %}</span></div>
+                <button type="submit" id="reg_submit" class="btn w-100" style="box-shadow: none; border: none;">Request Withdrawal</button>
             </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Amount: </label>
-              <input type="number" class="form-control" id="amount" name="amount">
-              <span style="color: red; display: none;" id="error">amount exceeds available balance</span>
-            </div>
-            <div>Available balance: $<span id="bal">{% if balance is None %}0{% else %}{{balance}}{% endif %}</span></div>
-            <button type="submit" id="reg_submit" class="contact_btn">Request Withdrawal</button>
-
-          </form>
+        </div>
     </form>
 </div>
 

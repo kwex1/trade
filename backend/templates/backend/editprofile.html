@@ -1,65 +1,60 @@
 {% extends 'base2.html' %}
 {% load static %}
+
+
 {% block body %}
-<link rel="stylesheet" href="{% static 'custom/css/custom.css'%}">
-<div class="center">
-	<br>
-	<form action="" method="post">
-		{% if form.errors %}
-		<div class="errors">
-			{{form.errors}}
-		</div>
-		{% endif %}
-		{% for message in messages %}
-		<center><span class="success">{{message}}</span></center>
-		{% endfor %}
-		{% csrf_token %}
-		<div class="row">
-			<div class="col-lg-6">
-				{{forms.first_name.label_tag}}
-				{{forms.first_name}}
 
-			</div>
-			<div class="col-lg-6">
-				{{forms.last_name.label_tag}}
-				{{forms.last_name}}
+<form method="post">
+    {% csrf_token %}
+    <div class="login-bg">
+        <div class="login px-4">
+            <p class="login-text">Update Profile</p>
+            {% if form.errors %}
+            <div style= "background-color: black; padding: 10px;">
+                <center><p style="color: yellow;">{{form.errors}}</p></center>
+            </div>
+            <br>
+            {% endif %}
+            {% for message in messages %}
+            <div  style="color: yellow; background-color: black; padding: 10px; " >
+                {{message}}
+            </div>
+            {% endfor %}
 
-			</div>
+            <div class="mb-3 ">
+                <label for="exampleFormControlInput1" class="form-label">{{forms.mobile_number.label_tag}}</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-phone"></i></span>
+                    {{forms.mobile_number}}
+                </div>
+            </div>
 
-			<div class="col-lg-6">
-				{{forms.username.label_tag}}
-				{{forms.username}}
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{forms.btc_wallet_address.label_tag}}</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-wallet"></i></span>
+                    {{forms.btc_wallet_address}}
+                </div>
+            </div>
 
-			</div>
-			<div class="col-lg-6">
-				{{forms.email.label_tag}}
-				{{forms.email}}
+			<div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{forms.eth_wallet_address.label_tag}}</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-wallet"></i></span>
+                    {{forms.eth_wallet_address}}
+                </div>
+            </div>
 
-			</div>
+			<div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{forms.usdt_trc20_wallet_address.label_tag}}</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-wallet"></i></span>
+                    {{forms.usdt_trc20_wallet_address}}
+                </div>
+            </div>
 
-			<div class="col-lg-6">
-				{{form.btc_wallet_address.label_tag}}
-				{{form.btc_wallet_address}}
-
-			</div>
-			<div class="col-lg-6">
-				{{form.eth_wallet_address.label_tag}}
-				{{form.eth_wallet_address}}
-
-			</div>
-
-			<div class="col-lg-6">
-				{{form.usdt_trc20_wallet_address.label_tag}}
-				{{form.usdt_trc20_wallet_address}}
-
-			</div>
-			<div class="col-lg-6">
-				{{form.mobile_number.label_tag}}
-				{{form.mobile_number}}
-			</div>
-		</div>
-		<br>
-		<button type="submit" id="reg_submit">Update</button>
-	</form>
-</div>
+            <button type="submit" class="btn  w-100 mt-3">Update Profile</button>
+        </div>
+    </div>
+</form> 
 {% endblock %}

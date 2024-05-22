@@ -12,26 +12,31 @@ from .utils import WithdrawalMail, CommisionMail, DepositMail, TransferMail, Tra
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self,email, full_name, password=None):
+    def create_user(self,email, first_name, last_name, password=None):
         if not email:
             raise ValueError('User must have an email address')
 
-        if not full_name:
-            raise ValueError('User must enter full name')
+        if not first_name:
+            raise ValueError('User must enter first name')
+        
+        if not last_name:
+            raise ValueError('User must enter last name')
 
         user = self.model(
             email = self.normalize_email(email),
-            full_name=full_name,
+            first_name = first_name,
+            last_name=last_name,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, full_name,email,password):
+    def create_superuser(self, first_name, last_name, email,password):
         user = self.create_user(
             email = self.normalize_email(email),
-            full_name=full_name,
+            first_name = first_name,
+            last_name=last_name,
             password=password,
         )
 
@@ -44,11 +49,11 @@ class MyUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    full_name    = models.CharField(max_length=100)
+    first_name    = models.CharField(max_length=100, blank=True, null=True)
+    last_name    = models.CharField(max_length=100, blank=True, null=True)
     email         = models.EmailField(max_length=100, unique=True)
     referal = models.CharField(max_length=20, unique=True, blank=True, null=True)
     refered_by = models.CharField(max_length=50, blank=True, null=True)
-    phone_number  = models.CharField(max_length=100)
     balance = models.IntegerField(default=0)
     country = CountryField(blank_label="(select country)")
     btc_wallet_address = models.CharField(max_length=300, blank=True, null=True)
@@ -66,13 +71,13 @@ class User(AbstractBaseUser):
     is_superadmin = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['full_name',]
+    REQUIRED_FIELDS = ['first_name','last_name']
 
     objects = MyUserManager()
 
 
     def __str__(self):
-        return self.full_name
+        return f"{self.first_name} {self.last_name}"
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
@@ -106,7 +111,7 @@ class Currency(models.Model):
 
     def save(self, *args, **kwargs):
         img = qrcode.make(self.wallet_id)
-        canvas = Image.new('RGB',(390,290), 'white')
+        canvas = Image.new('RGB',(390,390), 'white')
         draw = ImageDraw.Draw(canvas)
         canvas.paste(img)
         name = f'{self.name}QRCODE.png'
@@ -222,10 +227,10 @@ class Transfer(models.Model):
         if self.status == True:
             TransferMail(user,referer,amount)
             TransferRecieverMail(referer, amount, user)
-            bal =  User.objects.get(user= self.user)
+            bal =  User.objects.get(email= self.user.email)
             bal.balance -= int(amount)
-            recieved = User.objects.get(username=self.reciever)
-            custom = User.objects.get(user = recieved.pk)
+            recieved = User.objects.get(email=self.reciever)
+            custom = User.objects.get(email= recieved.email)
             custom.balance += int(amount)
             custom.save()
             bal.save()
@@ -244,6 +249,7 @@ class History(models.Model):
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE, blank=True, null=True)
     withdraw = models.ForeignKey(Withdrawal, on_delete=models.CASCADE, blank=True, null=True)
     invest = models.ForeignKey(Investment, on_delete=models.CASCADE, blank=True, null=True)
+    transfer = models.ForeignKey(Transfer, on_delete=models.CASCADE, blank=True, null=True)
     action =  models.CharField(max_length=200, choices=choice, blank=True, null=True, editable=False)
     currency = models.CharField(max_length=20, blank=True, null=True)
     amount = models.CharField(max_length=20)
@@ -288,7 +294,7 @@ class SystemEaring(models.Model):
 
     def save(self, *args, **kwargs):
         plans = Plan.objects.get(name = str(self.invest.plan))
-        total =  User.objects.filter(user=self.user)
+        total =  User.objects.filter(email=self.user)
         fig =  timezone.now().date() - self.date_created.date()
         diff = fig.days
         profit =  plans.profit

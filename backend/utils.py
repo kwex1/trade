@@ -12,7 +12,7 @@ TokenGenerator = passwordgenerator()
 def SendReferalMail(user,referer):
     email_subject = 'You have a new direct signup on Zenithport'
     email_body =  render_to_string('email/referalmail.html',{
-        'user':user.username,
+        'user':user.first_name,
         'referer': referer.user,
         'firstname': user.first_name,
         'lastname': user.last_name,
@@ -29,7 +29,7 @@ def SendReferalMail(user,referer):
 def DepositMail(user,amount,currency):
     email_subject = 'Deposit has been approved'
     email_body =  render_to_string('email/depositmail.html',{
-        'user':user.username,
+        'user':user.first_name,
         'amount': amount,
         'currency': currency
     })
@@ -43,7 +43,7 @@ def DepositMail(user,amount,currency):
 def WithdrawalMail(user, amount):
     email_subject = 'your withdrawal request has been approved'
     email_body =  render_to_string('email/withdrawalmail.html',{
-        'user':user.username,
+        'user':user.first_name,
         'amount': amount,
     })
     email = EmailMessage(subject=email_subject, body=email_body,
@@ -56,9 +56,9 @@ def WithdrawalMail(user, amount):
 def CommisionMail(user,referer, bonus):
     email_subject = 'Zenithport Referral Commission'
     email_body =  render_to_string('email/commision.html',{
-        'user':referer.username,
+        'user':referer.first_name,
         'bonus': bonus,
-        'referer': user.user.username
+        'referer': user.user.first_name
 
     })
     email = EmailMessage(subject=email_subject, body=email_body,

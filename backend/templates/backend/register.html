@@ -11,12 +11,12 @@
             <p class="login-text">SIGN UP</p>
 
 			{% if form.errors %}
-			<div class="errors" style="color: yellow; background-color: black;">
+			<div class="errors" style="color: yellow; background-color: black; padding: 10px;">
 				{{form.errors}}
 			</div>
 			{% endif %}
 			{% for message in messages %}
-			<center><span class="success" style="color: yellow; background-color: black; border: none;">{{message}}</span></center>
+			<center><span style="color: yellow; background-color: black; border: none; padding: 10px;">{{message}}</span></center>
 			{% endfor %}
 
 			<div class="mb-3">
@@ -28,10 +28,18 @@
             </div>
 
 			<div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">{{form.full_name.label_tag}}</label>
+                <label for="exampleFormControlInput1" class="form-label">{{form.first_name.label_tag}}</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
-                    {{form.full_name}}
+                    {{form.first_name}}
+                </div>
+            </div>
+
+			<div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">{{form.last.label_tag}}</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+                    {{form.last_name}}
                 </div>
             </div>
 
@@ -47,7 +55,7 @@
                 <label for="exampleFormControlInput1" class="form-label">{{form.phone_number.label_tag}}</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-phone"></i></span>
-                    {{form.phone_number}}
+                    {{form.mobile_number}}
                 </div>
             </div>
 
