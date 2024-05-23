@@ -1,54 +1,35 @@
 {% extends 'base2.html' %}
 {% block body %}
-<div class="row">
-    <div class="col-md-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic"><strong>First Name:</strong></span>
-            </div>
-            <input type="text" class="form-control" id="basic-url" style="text-align: center;" aria-describedby="basic" value="{{request.user.first_name}}" disabled>
+<div class="container mt-5 mx-4">
+    <h2 class="d-flex justify-content-center py-3">Personal Details</h2>
+    <div class="row">
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; color: white;">First Name: </span>
+            <span class="px-4">{{request.user.first_name}}</span> 
+        </div>
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; color: white;">Last Name: </span>
+            <span class="px-4">{{request.user.last_name}}</span> 
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic"><strong>Last Name:</strong></span>
-            </div>
-            <input type="text" class="form-control" id="basic-url" style="text-align: center;" aria-describedby="basic" value="{{request.user.last_name}}" disabled >
+    <div class="row">
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; color: white;">Email: </span>
+            <span class="px-4">{{request.user.email}}</span> 
+        </div>
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; color: white;">Mobile Number: </span>
+            <span class="px-4">{{request.user.mobile_number}}</span> 
         </div>
     </div>
-
-    <div class="col-md-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic"><strong>Username:</strong></span>
-            </div>
-            <input type="text" class="form-control" style="text-align: center;" id="basic-url" aria-describedby="basic" value="{{request.user.username}}" disabled>
+    <div class="row">
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; color: white;">Country: </span>
+            <span class="px-4">{{request.user.country.name}}</span> 
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic"><strong>Email:</strong></span>
-            </div>
-            <input type="text" class="form-control" id="basic-url" style="text-align: center;" aria-describedby="basic" value="{{request.user.email}}" disabled >
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic"><strong>Mobile Number:</strong></span>
-            </div>
-            <input type="text" class="form-control" style="text-align: center;" id="basic-url" aria-describedby="basic" value="{{details.mobile_number}}" disabled>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic"><strong>Country:</strong></span>
-            </div>
-            <input type="text" class="form-control" id="basic-url" style="text-align: center;" aria-describedby="basic" value="{{details.country.name}}" disabled >
+        <div class="col-md-6 py-2">
+            <span style="font-size: large; font-weight: bolder; color: white;">Referee: </span>
+            <span class="px-4">{{request.user.refered_by}}</span> 
         </div>
     </div>
 </div>

@@ -7,6 +7,14 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email', 'country', 'mobile_number', 'password1', 'password2')
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder':'First Name'}),
+            'last_name': forms.TextInput(attrs={'placeholder':'Last Name'}),
+            'email': forms.TextInput(attrs={'placeholder':'Enter email address'}),
+            'mobile_number': forms.TextInput(attrs={'placeholder':'Phone number'}),
+            'password1': forms.PasswordInput(attrs={'placeholder':'Enter Password'}),
+            'password2': forms.PasswordInput(attrs={'placeholder':'Confirm Password'}),
+        }
 
 class UserForm(forms.ModelForm):
     class Meta:

@@ -140,7 +140,7 @@ def ConfirmPayment(request):
     
 @login_required(login_url='/login/')  
 def profiledetails(request):
-    detail =  User.objects.get(user = request.user.id)
+    detail =  User.objects.get(email = request.user.email)
     arg = {'details':detail}
     return render(request, 'backend/profiledetails.html', arg)
 

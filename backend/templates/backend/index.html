@@ -20,7 +20,9 @@
           <p>We Provide</p>
           <h1>Customised Investment Options </h1>
           <p>We tailor investment strategies to individual needs and preferences</p>
-          <a href="{% url 'register' %}"><button class="btn btn-primary" type="submit">Get Started</button></a>
+          {% if not request.user.is_authenticated %}
+            <a href="{% url 'register' %}"><button class="btn btn-primary" type="submit">Get Started</button></a>
+          {% endif %}
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="3000">
@@ -30,7 +32,10 @@
           <p>We Provide</p>
           <h1>FINANCIAL DRIVEN ASSETS</h1>
           <p>Our assets selection are financial-based and that is why we can guarantee high ROI for investors</p>
-          <a href="{% url 'register' %}"><button class="btn btn-primary" type="submit">Get Started</button></a>
+          {% if not request.user.is_authenticated %}
+            <a href="{% url 'register' %}"><button class="btn btn-primary" type="submit">Get Started</button></a>
+          {% endif %}
+          
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="3000">
@@ -40,7 +45,9 @@
           <p>We Provide</p>
           <h1>DIVERSIFY PORTFOLIO</h1>
           <p>Diversification allows us minimize risk for our clients by spreads risk across assets, stocks, bonds, and brisk.</p>
-          <a href="{% url 'register' %}"><button class="btn btn-primary" type="submit">Get Started</button></a>
+          {% if not request.user.is_authenticated %}
+            <a href="{% url 'register' %}"><button class="btn btn-primary" type="submit">Get Started</button></a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -58,7 +65,7 @@
   <!--Carousel ended-->
 
 
-<div class="section1">
+<div class="container section1">
     <div class="row">
         <div class="col-lg-12">
             <p class="offer">What We Offer</p>
@@ -108,10 +115,10 @@
     </div>
 </div>
 
-<div class="section2">
+<div class="container section2">
     <div class="row">
         <div class="col-lg-6">
-            <h3 class="details">ABOUT US</h3>
+            <h3 class="details pb-4">ABOUT US</h3>
             <p class="about">Company_Name is a financial management company, providing high screened investment portfolio's which are present in all major capital markets. Our core benevolence of Financial services through our professional management and traders, creates a unique advancement of reliable financial services. This is why everything we do starts with a full understanding of what matters to you.</p>
         </div>
         <div class="col-lg-6">
@@ -132,85 +139,99 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-3">
-            <div class="card" style="width: 100%; margin-bottom: 15px;" data-aos="fade-right">
-                <img src="{% static 'img/category1.jpg' %}" height="200" class="card-img-top" alt="...">
-                <div class="card-body bg-dark text-white">
-                    <h5 class="card-title">Financial Planning</h5>
-                    <a href="#" class="btn btn-primary d-flex justify-content-center">click to learn more</a>
-                </div>
+        <div class="col-lg-4">
+            <div class="invest" data-aos="flip-left">
+                <h4>Starter Plan</h4>
+                <h1>4%</h1>
+                <p>Daily for 5days(mon-fri)</p>
+                <ul>
+                    <li>Minimum $100</li>
+                    <li>Maximum $999</li>
+                    <li>Total Profit Return: 100%</li>
+                    <li>Referal 2%</li>
+                </ul>
+                <p>Monthly withdrawal</p>
+                {% if request.user.is_authenticated %}
+                <button class="btn w-50"><a href="#"></a>invest</button>
+                {% endif %}
             </div>    
         </div>
-        <div class="col-lg-3">
-            <div class="card" style="width: 100%; margin-bottom: 15px;" data-aos="zoom-in">
-                <img src="{% static 'img/category2.jpg' %}" height="200" class="card-img-top" alt="...">
-                <div class="card-body bg-dark text-white">
-                    <h5 class="card-title">Real Estate Investment</h5>
-                    <a href="#" class="btn btn-primary d-flex justify-content-center">click to learn more</a>
-                </div>
-            </div> 
-            
+        <div class="col-lg-4">
+            <div class="invest" data-aos="flip-up">
+                <h4>Premium Plan</h4>
+                <h1>6%</h1>
+                <p>Daily for 5days(mon-fri)</p>
+                <ul>
+                    <li>Minimum $1000</li>
+                    <li>Maximum $5999</li>
+                    <li>Total Profit Return: 150%</li>
+                    <li>Referal 3%</li>
+                </ul>
+                <p>Monthly withdrawal</p>
+                {% if request.user.is_authenticated %}
+                <button class="btn w-50"><a href="#"></a>invest</button>
+                {% endif %}
+            </div>    
         </div>
-        <div class="col-lg-3">
-            <div class="card" style="width: 100%; margin-bottom: 15px;" data-aos="zoom-in">
-                <img src="{% static 'img/category3.jpg' %}" height="200" class="card-img-top" alt="...">
-                <div class="card-body bg-dark text-white">
-                    <h5 class="card-title">Cryptocurrency</h5>
-                    <a href="#" class="btn btn-primary d-flex justify-content-center">click to learn more</a>
-                </div>
-            </div> 
+        <div class="col-lg-4">
+            <div class="invest " data-aos="flip-right">
+                <h4>Vip Plan</h4>
+                <h1>10%</h1>
+                <p>Daily for 5days(mon-fri)</p>
+                <ul>
+                    <li>Minimum $6000</li>
+                    <li>Maximum $1 million</li>
+                    <li>Total Profit Return: 250%</li>
+                    <li>Referal 5%</li>
+                </ul>
+                <p>Monthly withdrawal</p>
+                {% if request.user.is_authenticated %}
+                <button class="btn w-50"><a href="#"></a>invest</button>
+                {% endif %}
+            </div>    
+        </div>
         
-        </div>
-        <div class="col-lg-3">
-            <div class="card" style="width: 100%; margin-bottom: 15px;" data-aos="fade-left">
-                <img src="{% static 'img/category2.jpg' %}" height="200" class="card-img-top" alt="...">
-                <div class="card-body bg-dark text-white">
-                    <h5 class="card-title">Real Estate Investment</h5>
-                    <a href="#" class="btn btn-primary d-flex justify-content-center">click to learn more</a>
-                </div>
-            </div> 
-            
-        </div>
     </div>
 </div>
 
-
-<div class="row" style="margin-bottom: 20px;">
-    <div class="col-lg-12">
-        <div class="counter">
-            <img src="{% static 'img/bg.jpg' %}" style="width: 100%; height: 50vh; object-fit: cover;" alt="error loading image">
-            <div class="overlay">
-                <div class="trophy">
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <div class="center">
-                                <i class="fa-regular fa-user fa-2x d-flex justify-content-center" style="color: white;"></i>        
-                                <p class="benifit d-flex justify-content-center">4428<span>+</span></p>
-                                <p class="d-flex justify-content-center" style="color: white;">Satisfied Investors</p>
-                            </div>                                   
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="center">
-                                <i class="fa-solid fa-users fa-2x d-flex justify-content-center" style="color: white;"></i>
-                                <p class="benifit d-flex justify-content-center">14666<span>+</span></p>
-                                <p class="d-flex justify-content-center" style="color: white;">Consultations</p>
+<div class="container">
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-lg-12">
+            <div class="counter">
+                <img src="{% static 'img/bg.jpg' %}" style="width: 100%; height: 50vh; object-fit: cover;" alt="error loading image">
+                <div class="overlay">
+                    <div class="trophy">
+                        <div class="row">
+                            <div class="col-lg-3 col-6">
+                                <div class="center">
+                                    <i class="fa-regular fa-user fa-2x d-flex justify-content-center" style="color: white;"></i>        
+                                    <p class="benifit d-flex justify-content-center">4428<span>+</span></p>
+                                    <p class="d-flex justify-content-center" style="color: white;">Satisfied Investors</p>
+                                </div>                                   
                             </div>
+                            <div class="col-lg-3 col-6">
+                                <div class="center">
+                                    <i class="fa-solid fa-users fa-2x d-flex justify-content-center" style="color: white;"></i>
+                                    <p class="benifit d-flex justify-content-center">14666<span>+</span></p>
+                                    <p class="d-flex justify-content-center" style="color: white;">Consultations</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <div class="center">
+                                    <i class="fa-solid fa-trophy fa-2x d-flex justify-content-center" style="color: white;"></i>
+                                    <p class="benifit d-flex justify-content-center">27<span>+</span></p>
+                                    <p class="d-flex justify-content-center" style="color: white;">Awards won</p>
+                                </div> 
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <div class="center">
+                                    <i class="fa-solid fa-handshake fa-2x d-flex justify-content-center" style="color: white;"></i>
+                                    <p class="benifit d-flex justify-content-center">625<span>+</span></p>
+                                    <p class="d-flex justify-content-center" style="color: white;">Partnerships</p>
+                                </div> 
+                            </div>
+                            
                         </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="center">
-                                <i class="fa-solid fa-trophy fa-2x d-flex justify-content-center" style="color: white;"></i>
-                                <p class="benifit d-flex justify-content-center">27<span>+</span></p>
-                                <p class="d-flex justify-content-center" style="color: white;">Awards won</p>
-                            </div> 
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="center">
-                                <i class="fa-solid fa-handshake fa-2x d-flex justify-content-center" style="color: white;"></i>
-                                <p class="benifit d-flex justify-content-center">625<span>+</span></p>
-                                <p class="d-flex justify-content-center" style="color: white;">Partnerships</p>
-                            </div> 
-                        </div>
-                        
                     </div>
                 </div>
             </div>
@@ -220,10 +241,10 @@
 
 
 
-<div class="section4">
+<div class="container section4">
     <div class="row">
         <div class="col-lg-6">
-            <h3 class="details">Our Vision</h3>
+            <h3 class="details pb-4">Our Vision</h3>
             <p class="about">We hope through our services to grant financial freedom to as much people we can reach. Our journey has been fruitful so far and we are very optimistic that we will affect more lives positively through our relentless effort in improving our services. We believe saving should be simple. Through a straightforward and easy way to diversify your portfolios to achieve your financial goals. We’re making it easier to invest and make an impact without affecting your lifestyle. Everyone should be able to invest, regardless of their income. We are amazing financial investment platform, don't wait. You can start up now and grow your income.</p>
         </div>
         <div class="col-lg-6">
@@ -239,7 +260,7 @@
 
 
 
-<div class="section3">
+<div class="container section3">
     <div class="row">
         <div class="col-lg-12">
             <p class="sm-header">Testimonial</p>
