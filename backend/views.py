@@ -146,9 +146,9 @@ def profiledetails(request):
 
 @login_required(login_url='/login/')  
 def Referal(request):
-    detail =  User.objects.get(user = request.user)
-    refer = User.objects.all().filter(refered_by = str(request.user.username))
-    bonus = ReferalBonus.objects.all().filter(user=str(request.user))
+    detail =  User.objects.get(email = request.user.email)
+    refer = User.objects.all().filter(refered_by = str(request.user.pk))
+    bonus = ReferalBonus.objects.all().filter(user=str(request.user.email))
     total = 0
     for i in bonus:
         total += i.earnings
@@ -358,4 +358,8 @@ def notification(request):
     id =  request.POST['id']
     data = NotificationVisibility.objects.update_or_create(user = user, notification_id=int(id))
     return JsonResponse('successfully updated', safe=False)
+
+def buycoin(request):
+    return render(request, 'backend/buy.html')
+
 

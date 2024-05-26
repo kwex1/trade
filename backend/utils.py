@@ -13,14 +13,14 @@ def SendReferalMail(user,referer):
     email_subject = 'You have a new direct signup on Zenithport'
     email_body =  render_to_string('email/referalmail.html',{
         'user':user.first_name,
-        'referer': referer.user,
+        'referer': referer.first_name,
         'firstname': user.first_name,
         'lastname': user.last_name,
         'email': user.email
 
     })
     email = EmailMessage(subject=email_subject, body=email_body,
-        from_email='ZenithPort <support@zenithport.com>', to=[referer.user.email]
+        from_email='ZenithPort <support@zenithport.com>', to=[referer.email]
         )
     email.content_subtype = 'html'
     email.send()

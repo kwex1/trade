@@ -39,6 +39,7 @@ urlpatterns = [
   path('faq/', views.Faq, name='faq'),
   path('terms_and_conditions/', views.terms, name='terms'),
   path('update_notification/', views.notification, name='update_notification'),
+  path('buy-coin/', views.buycoin, name='buycoin'),
 
 
 

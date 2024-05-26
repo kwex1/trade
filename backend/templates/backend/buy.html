@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+        <p class="offer">Purchase Digital Currency</p>
+        <div class="divider"></div>
+        <p class="info">We recommend purchasing from one of this trusted exchanges, there reputation ensures reliable and safe experience.</p>
+    </div>
+  </div>
+  <div class="row mt-4 mb-4">
+    <div class="col-md-4">
+      <div class="coin-bg">
+        <img src="{% static 'img/binance.png' %}" class="image" alt="...">
+        <div class="middle">
+          <a href="https://www.binance.com/en" target="_blank"><button class="w-100 btn">Buy coin</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="coin-bg">
+        <img src="{% static 'img/okx.png' %}" class="image" alt="...">
+        <div class="middle">
+          <a href="https://www.okx.com/" target="_blank"><button class="w-100 btn">Buy coin</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="coin-bg">
+        <img src="{% static 'img/bybit.png' %}" class="image" alt="...">
+        <div class="middle">
+          <a href="https://www.bybit.com/en/" target="_blank"><button class="w-100 btn">Buy coin</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

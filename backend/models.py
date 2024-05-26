@@ -78,6 +78,10 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+    
+    def save(self, *args, **kwargs):
+        self.referal = f"{self.pk}{self.first_name}{self.pk}"
+        super().save(*args, **kwargs)
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
